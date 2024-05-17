@@ -192,14 +192,24 @@ public class Action {
 
     public String chooseGoodColor(ArrayList<Card> cards) { //szinvalasztos method
         ArrayList<String> goodColors = new ArrayList<String>(); // ide taroljuk a megfelelo szineket
-
+        
+        
         for (Card i : cards) {
             if (!i.getColor().equals("black")) { //nem fekete kartyak
                 goodColors.add(i.getColor()); //kivalasztasa
             }
         }
+        
+        String choosedColor = ""; //a jo szinek kozul valo valasztas
+        
+        if(goodColors.size() == 0){
+            ArrayList<String> colors = new ArrayList<String>(Arrays.asList("Green", "Yellow", "Blue", "Red"));
+            choosedColor = colors.get(new Random().nextInt(0, 4));
+        } else{
+           choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())); //a jo szinek kozul valo valasztas
+        }
 
-        String choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())); //a jo szinek kozul valo valasztas
+        
         
         return choosedColor; //returnoljuk a kivalasztott szint
     }
