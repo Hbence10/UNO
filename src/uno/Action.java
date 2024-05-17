@@ -41,9 +41,7 @@ public class Action {
             }
         }
 
-        if (this.deck.size() == 0) { //ha kifogyott a pakli akkor a lent levo lapokbol ujat kell keverni
-            reloadDeck();
-        }
+   
 
         if (goodCard.size() == 0) { //Ha nem tudok huzni lapot akkor huznom kell
             drag(ongoingPlayerPlayer); //meghivom a huzas methodot
