@@ -51,9 +51,9 @@ public class Action {
         if (this.deck.isEmpty()) {
             reloadDeck();
         }
+        System.out.println(player.getName() + " retrieved: " + this.deck.peek().getCardFullName()); //kiprinteljuk az akciot
+        
         player.getHand().add(this.deck.pop()); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
-
-        System.out.println(player.getName() + " retrieved: " + this.deck.get(this.deck.size() - 1).getCardFullName()); //kiprinteljuk az akciot
     }
 
     public void deposit(Player player, ArrayList<Integer> goodCard, Player otherPlayer) { //rakas
