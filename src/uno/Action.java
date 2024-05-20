@@ -3,7 +3,6 @@ package uno;
 import java.util.*;
 
 public class Action {
-
     private ArrayList<Card> deck; //Huzopakli
     private ArrayList<Card> onTable; //Az asztalon levo kartyak
 
@@ -57,7 +56,6 @@ public class Action {
         System.out.println(player.getName() + " retrieved: " + this.deck.get(this.deck.size() - 1).getCardFullName()); //kiprinteljuk az akciot
 
         this.deck.remove(this.deck.size() - 1); //a huzopaklibol eltavolitjuk a kihuzott lapot
-
     }
 
     public void deposit(Player player, ArrayList<Integer> goodCard, Player otherPlayer) { //rakas
@@ -175,22 +173,16 @@ public class Action {
         System.out.println("\n---------\nINFORMATION");
         System.out.println("\nRemaining card in the deck: " + this.deck.size() + "\n");
         System.out.println(player1.getName() + ": ");
-        System.out.println("Cards in her hand: " + player1Card.toString().replace("[", "").replace("]", ""));
+        System.out.println("Cards in his hand: " + player1Card.toString().replace("[", "").replace("]", ""));
 
         System.out.println("\n" + player2.getName() + ": ");
-        System.out.println("Cards in her hand: " + player2Card.toString().replace("[", "").replace("]", ""));
+        System.out.println("Cards in his hand: " + player2Card.toString().replace("[", "").replace("]", ""));
 
         System.out.println("\nCard on the table: " + this.onTable.get(this.onTable.size() - 1).getCardFullName() + "\n");
     }
 
     public String chooseGoodColor(ArrayList<Card> cards) { //szinvalasztos method
-        ArrayList<String> goodColors = new ArrayList<String>(); // ide taroljuk a megfelelo szineket
-
-        for (Card i : cards) {
-            if (!i.getColor().equals("black")) { //nem fekete kartyak
-                goodColors.add(i.getColor()); //kivalasztasa
-            }
-        }
+        List<Card> goodColors = cards.stream().filter(card -> !card.getColor().equals("black")).toList(); // ide taroljuk a megfelelo szineket
 
         String choosedColor = ""; //a jo szinek kozul valo valasztas
 
@@ -198,7 +190,7 @@ public class Action {
             ArrayList<String> colors = new ArrayList<String>(Arrays.asList("Green", "Yellow", "Blue", "Red"));
             choosedColor = colors.get(new Random().nextInt(0, 4));
         } else {
-            choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())); //a jo szinek kozul valo valasztas
+            choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())).getColor(); //a jo szinek kozul valo valasztas
         }
 
         return choosedColor; //returnoljuk a kivalasztott szint
