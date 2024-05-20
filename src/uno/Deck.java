@@ -3,14 +3,14 @@ package uno;
 import java.util.*;
 
 class Deck {
-    private static ArrayList<Card> deck = new ArrayList<Card>(); //a huzopakli
-    private static ArrayList<Card> onTable = new ArrayList<Card>(); //az asztalra lerakott lapok
+    private static Stack<Card> deck = new Stack<Card>(); //a huzopakli
+    private static Stack<Card> onTable = new Stack<Card>(); //az asztalra lerakott lapok
 
-    public ArrayList<Card> getDeck() {
+    public Stack<Card> getDeck() {
         return deck;
     } // a huzopaklinak a getterje
 
-    public ArrayList<Card> getOnTable() {
+    public Stack<Card> getOnTable() {
         return onTable;
     }// a huzopaklinak a getterje
     
@@ -32,16 +32,16 @@ class Deck {
         this.onTable.add(normalCards.get(new Random().nextInt(0, normalCards.size())));
     }
   
-    public static void setDeck(ArrayList<Card> deck) {
+    public static void setDeck(Stack<Card> deck) {
         Deck.deck = deck;
     }
 
-    public void setOnTable(ArrayList<Card> onTable) {
+    public void setOnTable(Stack<Card> onTable) {
         this.onTable = onTable;
     }
 
     public static void reloadDeck(){
-        ArrayList<Card> cards = new ArrayList<Card>();
+        Stack<Card> cards = new Stack<Card>();
         for(int i = onTable.size()-2; i> 1; i--){
             if(!onTable.get(i).getNumber().equals("-")){
                 cards.add(onTable.get(i));

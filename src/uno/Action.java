@@ -3,27 +3,27 @@ package uno;
 import java.util.*;
 
 public class Action {
-    private ArrayList<Card> deck; //Huzopakli
-    private ArrayList<Card> onTable; //Az asztalon levo kartyak
+    private Stack<Card> deck; //Huzopakli
+    private Stack<Card> onTable; //Az asztalon levo kartyak
 
-    public Action(ArrayList<Card> deck, ArrayList<Card> onTable) {
+    public Action(Stack<Card> deck, Stack<Card> onTable) {
         this.deck = deck;
         this.onTable = onTable;
     }
 
-    public ArrayList<Card> getDeck() {
+    public Stack<Card> getDeck() {
         return deck;
     }
 
-    public ArrayList<Card> getOnTable() {
+    public Stack<Card> getOnTable() {
         return onTable;
     }
 
-    public void setDeck(ArrayList<Card> deck) {
+    public void setDeck(Stack<Card> deck) {
         this.deck = deck;
     }
 
-    public void setOnTable(ArrayList<Card> onTable) {
+    public void setOnTable(Stack<Card> onTable) {
         this.onTable = onTable;
     }
 
@@ -35,7 +35,7 @@ public class Action {
         for (int i = 0; i < ongoingPlayerPlayer.getHand().size(); i++) { //A kezben levo kartyak vizsgalasa, lerakhato egy kartya ha:
             if (ongoingPlayerPlayer.getHand().get(i).getColor().equals("black")) { //ha a kezben van fekete szinu kartya azaz szinvaltos vagy huz fel negyet lap
                 goodCard.add(i); //ezt a kartyat hozzaadom a megfelelo kartyak listajahoz
-            } else if (ongoingPlayerPlayer.getHand().get(i).getColor().equals(this.onTable.get(this.onTable.size() - 1).getColor()) || ongoingPlayerPlayer.getHand().get(i).getNumber().equals(this.onTable.get(this.onTable.size() - 1).getNumber())) { //ha a kezunkben van ugyanolyan szamu vagy szinu lap mint ami az asztal tetejen van
+            } else if (ongoingPlayerPlayer.getHand().get(i).getColor().equals(this.onTable.peek().getColor()) || ongoingPlayerPlayer.getHand().get(i).getNumber().equals(this.onTable.peek().getNumber())) { //ha a kezunkben van ugyanolyan szamu vagy szinu lap mint ami az asztal tetejen van
                 goodCard.add(i); //ezt a kartyat hozzaadom a megfelelo kartyak listajahoz
             }
         }
@@ -51,17 +51,15 @@ public class Action {
         if (this.deck.isEmpty()) {
             reloadDeck();
         }
-        player.getHand().add(this.deck.get(this.deck.size() - 1)); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
+        player.getHand().add(this.deck.pop()); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
 
         System.out.println(player.getName() + " retrieved: " + this.deck.get(this.deck.size() - 1).getCardFullName()); //kiprinteljuk az akciot
-
-        this.deck.remove(this.deck.size() - 1); //a huzopaklibol eltavolitjuk a kihuzott lapot
     }
 
     public void deposit(Player player, ArrayList<Integer> goodCard, Player otherPlayer) { //rakas
         Card choosenCard = player.getHand().get(goodCard.get(new Random().nextInt(0, goodCard.size()))); //a jo kartyak kozul kivalasztunk random egyer
 
-        this.onTable.add(choosenCard); // "lerakjuk"
+        this.onTable.push(choosenCard); // "lerakjuk"
         player.getHand().remove(choosenCard); //eltavolitjuk a kezunkbol
 
         if (choosenCard.getSpecialCard()) { //megviszgaljuk hogy a kartya specialis kartya-e
@@ -91,7 +89,7 @@ public class Action {
     }
 
     public void reloadDeck() {  //pakli ujratoltese
-        ArrayList<Card> cards = new ArrayList<Card>(); //megfelelo kartyak
+        Stack<Card> cards = new Stack<Card>(); //megfelelo kartyak
 
         for (int i = this.onTable.size() - 2; i > 1; i--) {
             if (!this.onTable.get(i).getNumber().equals("-")) {  //megnezzuk hogy az adott kartya nem csak szin kartya
@@ -192,7 +190,6 @@ public class Action {
         } else {
             choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())).getColor(); //a jo szinek kozul valo valasztas
         }
-
         return choosedColor; //returnoljuk a kivalasztott szint
     }
 }
