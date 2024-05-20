@@ -102,8 +102,8 @@ public class Action {
         ArrayList<Card> cards = new ArrayList<Card>(); //megfelelo kartyak
 
         for (int i = this.onTable.size() - 2; i > 1; i--) {
-            if (!onTable.get(i).getNumber().equals("-")) {  //megnezzuk hogy az adott kartya nem csak szin kartya
-                cards.add(onTable.get(i)); //ha az akkor a megfelelo kartyakhoz hozzaadjuk
+            if (!this.onTable.get(i).getNumber().equals("-")) {  //megnezzuk hogy az adott kartya nem csak szin kartya
+                cards.add(this.onTable.get(i)); //ha az akkor a megfelelo kartyakhoz hozzaadjuk
                 this.onTable.remove(i); //es kitoroljuk az asztalrol
             } else {
                 this.onTable.remove(i); // is kitoroljuk az asztalrol
