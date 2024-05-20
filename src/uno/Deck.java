@@ -6,8 +6,8 @@ import javax.swing.*;
 
 class Deck {
 
-    public static ArrayList<Card> deck = new ArrayList<Card>(); //a huzopakli
-    public static ArrayList<Card> onTable = new ArrayList<Card>(); //az asztalra lerakott lapok
+    private static ArrayList<Card> deck = new ArrayList<Card>(); //a huzopakli
+    private static ArrayList<Card> onTable = new ArrayList<Card>(); //az asztalra lerakott lapok
 
     public ArrayList<Card> getDeck() {
         return deck;
@@ -25,7 +25,7 @@ class Deck {
         }
     }
     
-    public void selectStarterCard(){
+    public void selectStarterCard(){ //kezdo kartya kivalasztasa
         ArrayList<Card> normalCards  = new ArrayList<Card>();
         
         for(Card i : deck){

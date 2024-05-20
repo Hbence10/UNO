@@ -1,14 +1,9 @@
 package uno;
 
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
-
 public class Card {
-
-    public String color;
-    public String number;
-    public Boolean specialCard;
+    private String color;
+    private String number;
+    private Boolean specialCard;
 
     public Card(String color, String number, Boolean specialCard) {
         this.color = color;

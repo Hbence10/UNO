@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Player {
 
-    public String name;
+    private String name;
     private ArrayList<Card> hand;
 
     public Player(String name) {

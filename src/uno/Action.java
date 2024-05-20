@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Action {
 
-    public ArrayList<Card> deck; //Huzopakli
-    public ArrayList<Card> onTable; //Az asztalon levo kartyak
+    private ArrayList<Card> deck; //Huzopakli
+    private ArrayList<Card> onTable; //Az asztalon levo kartyak
 
     public Action(ArrayList<Card> deck, ArrayList<Card> onTable) {
         this.deck = deck;
@@ -52,7 +52,7 @@ public class Action {
     }
 
     public void drag(Player player) { //huzas
-       if(this.deck.size() == 1){
+       if(this.deck.isEmpty()){
            reloadDeck();
        }
        
@@ -82,7 +82,7 @@ public class Action {
 
     public void sayUno(Player player) { //UNO mondasa
         if (player.getHand().size() == 1) { //ha a jatekosnak egy kartyaja maradt a kezeben
-            System.out.println(player.name + ": UNO!"); //akkor mondja hogy UNO
+            System.out.println(player.getName() + ": UNO!"); //akkor mondja hogy UNO
         }
     }
 

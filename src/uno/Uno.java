@@ -38,7 +38,7 @@ public class Uno {
     public static void main(String[] args) {
         Deck deck = createDeck();
 
-        Action movement = new Action(deck.getDeck(), deck.onTable);
+        Action movement = new Action(deck.getDeck(), deck.getOnTable());
         Player robot1 = new Player("Ichigo");
         Player robot2 = new Player("Gojo");
 
