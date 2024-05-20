@@ -1,8 +1,6 @@
 package uno;
 
 import java.util.*;
-import java.awt.*;
-import javax.swing.*;
 
 public class Player {
 
@@ -29,6 +27,4 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
-    
 }

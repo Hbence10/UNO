@@ -3,7 +3,6 @@ package uno;
 import java.util.*;
 
 public class Action {
-
     private ArrayList<Card> deck; //Huzopakli
     private ArrayList<Card> onTable; //Az asztalon levo kartyak
 
@@ -41,29 +40,25 @@ public class Action {
             }
         }
 
-   
-
         if (goodCard.size() == 0) { //Ha nem tudok huzni lapot akkor huznom kell
             drag(ongoingPlayerPlayer); //meghivom a huzas methodot
         } else { //Ha meg tudok rakni
             deposit(ongoingPlayerPlayer, goodCard, otherPlayerPlayer); //meghivom a rakas methodot
-            
+
         }
     }
 
     public void drag(Player player) { //huzas
-       if(this.deck.isEmpty()){
-           reloadDeck();
-       }
-       
-     
-       
+        if (this.deck.isEmpty()) {
+            reloadDeck();
+        }
+
         player.getHand().add(this.deck.get(this.deck.size() - 1)); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
 
         System.out.println(player.getName() + " retrieved: " + this.deck.get(this.deck.size() - 1).getCardFullName()); //kiprinteljuk az akciot
-        
+
         this.deck.remove(this.deck.size() - 1); //a huzopaklibol eltavolitjuk a kihuzott lapot
-        
+
     }
 
     public void deposit(Player player, ArrayList<Integer> goodCard, Player otherPlayer) { //rakas
@@ -132,7 +127,7 @@ public class Action {
             case "Wild and Draw 4": //huzz fel negyet es valasz szint kartya
                 System.out.println(msg);
                 if (ongoingPlayer.getHand().size() > 0) { //megvizsgaljuk, hogy nem ez az utolso kartyank, ha nem ez akkor 
-                     String choosedColor = chooseGoodColor(ongoingPlayer.getHand()); //kivalasztjuk azt a szint amelyet szeretnenk
+                    String choosedColor = chooseGoodColor(ongoingPlayer.getHand()); //kivalasztjuk azt a szint amelyet szeretnenk
 
                     System.out.println(ongoingPlayer.getName() + " wants " + choosedColor + " color \n"); //kiirjuk az akciot
                     this.onTable.add(new Card(choosedColor, "-", false)); // hozaadunk lenyegeben egy szin kartyar
@@ -192,25 +187,22 @@ public class Action {
 
     public String chooseGoodColor(ArrayList<Card> cards) { //szinvalasztos method
         ArrayList<String> goodColors = new ArrayList<String>(); // ide taroljuk a megfelelo szineket
-        
-        
+
         for (Card i : cards) {
             if (!i.getColor().equals("black")) { //nem fekete kartyak
                 goodColors.add(i.getColor()); //kivalasztasa
             }
         }
-        
+
         String choosedColor = ""; //a jo szinek kozul valo valasztas
-        
-        if(goodColors.size() == 0){
+
+        if (goodColors.size() == 0) {
             ArrayList<String> colors = new ArrayList<String>(Arrays.asList("Green", "Yellow", "Blue", "Red"));
             choosedColor = colors.get(new Random().nextInt(0, 4));
-        } else{
-           choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())); //a jo szinek kozul valo valasztas
+        } else {
+            choosedColor = goodColors.get(new Random().nextInt(0, goodColors.size())); //a jo szinek kozul valo valasztas
         }
 
-        
-        
         return choosedColor; //returnoljuk a kivalasztott szint
     }
 }

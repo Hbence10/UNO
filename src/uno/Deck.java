@@ -1,11 +1,8 @@
 package uno;
 
 import java.util.*;
-import java.awt.*;
-import javax.swing.*;
 
 class Deck {
-
     private static ArrayList<Card> deck = new ArrayList<Card>(); //a huzopakli
     private static ArrayList<Card> onTable = new ArrayList<Card>(); //az asztalra lerakott lapok
 
@@ -28,15 +25,14 @@ class Deck {
     public void selectStarterCard(){ //kezdo kartya kivalasztasa
         ArrayList<Card> normalCards  = new ArrayList<Card>();
         
-        for(Card i : deck){
+        for(Card i : this.deck){
             if(i.getSpecialCard() == false){
                 normalCards.add(i);
             }
         }
         
-        onTable.add(normalCards.get(new Random().nextInt(0, normalCards.size())));
+        this.onTable.add(normalCards.get(new Random().nextInt(0, normalCards.size())));
     }
-
   
     public static void setDeck(ArrayList<Card> deck) {
         Deck.deck = deck;
@@ -62,6 +58,4 @@ class Deck {
         
         deck = cards;
     }
-    
-    
 }
