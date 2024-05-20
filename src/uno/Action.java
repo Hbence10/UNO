@@ -53,7 +53,7 @@ public class Action {
         }
         System.out.println(player.getName() + " retrieved: " + this.deck.peek().getCardFullName()); //kiprinteljuk az akciot
         
-        player.getHand().add(this.deck.pop()); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
+        player.getHand().add(this.deck.pop()); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot es egyben toroljuk azt
     }
 
     public void deposit(Player player, ArrayList<Integer> goodCard, Player otherPlayer) { //rakas
