@@ -38,5 +38,4 @@ public class Card {
     public void setSpecialCard(Boolean specialCard) {
         this.specialCard = specialCard;
     }
-
 }

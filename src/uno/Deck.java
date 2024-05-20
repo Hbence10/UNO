@@ -14,7 +14,6 @@ class Deck {
         return onTable;
     }// a huzopaklinak a getterje
     
-    
     public void uppLoadDeck(Card card) {//ezzel a methoddal toltjuk fel a huzopaklit
         this.deck.add(card);
         if (this.deck.size() == 112) {
@@ -30,7 +29,6 @@ class Deck {
                 normalCards.add(i);
             }
         }
-        
         this.onTable.add(normalCards.get(new Random().nextInt(0, normalCards.size())));
     }
   
@@ -44,7 +42,6 @@ class Deck {
 
     public static void reloadDeck(){
         ArrayList<Card> cards = new ArrayList<Card>();
-        
         for(int i = onTable.size()-2; i> 1; i--){
             if(!onTable.get(i).getNumber().equals("-")){
                 cards.add(onTable.get(i));

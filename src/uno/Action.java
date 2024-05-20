@@ -3,6 +3,7 @@ package uno;
 import java.util.*;
 
 public class Action {
+
     private ArrayList<Card> deck; //Huzopakli
     private ArrayList<Card> onTable; //Az asztalon levo kartyak
 
@@ -44,7 +45,6 @@ public class Action {
             drag(ongoingPlayerPlayer); //meghivom a huzas methodot
         } else { //Ha meg tudok rakni
             deposit(ongoingPlayerPlayer, goodCard, otherPlayerPlayer); //meghivom a rakas methodot
-
         }
     }
 
@@ -52,7 +52,6 @@ public class Action {
         if (this.deck.isEmpty()) {
             reloadDeck();
         }
-
         player.getHand().add(this.deck.get(this.deck.size() - 1)); //a player kezeben levo lapjaihoz hozzaadjuk a huzo pakli tetejen levo lapot
 
         System.out.println(player.getName() + " retrieved: " + this.deck.get(this.deck.size() - 1).getCardFullName()); //kiprinteljuk az akciot
@@ -90,7 +89,7 @@ public class Action {
     }
 
     public boolean checkWin(Player player) { //nyerest vizsgalja
-        return player.getHand().size() == 0; //returnoli hogy nulla van-e a kezunkben
+        return player.getHand().isEmpty(); //returnoli hogy nulla van-e a kezunkben
     }
 
     public void reloadDeck() {  //pakli ujratoltese
@@ -126,7 +125,7 @@ public class Action {
 
             case "Wild and Draw 4": //huzz fel negyet es valasz szint kartya
                 System.out.println(msg);
-                if (ongoingPlayer.getHand().size() > 0) { //megvizsgaljuk, hogy nem ez az utolso kartyank, ha nem ez akkor 
+                if (!ongoingPlayer.getHand().isEmpty()) { //megvizsgaljuk, hogy nem ez az utolso kartyank, ha nem ez akkor 
                     String choosedColor = chooseGoodColor(ongoingPlayer.getHand()); //kivalasztjuk azt a szint amelyet szeretnenk
 
                     System.out.println(ongoingPlayer.getName() + " wants " + choosedColor + " color \n"); //kiirjuk az akciot
@@ -141,7 +140,7 @@ public class Action {
 
             case "Wild": //sima szinvalasztas
                 System.out.println(msg); //kiirjuk az akciot
-                if (ongoingPlayer.getHand().size() > 0) {  //ha nem ez az utolso kartyank
+                if (!ongoingPlayer.getHand().isEmpty()) {  //ha nem ez az utolso kartyank
                     String choosedColor = chooseGoodColor(ongoingPlayer.getHand()); //kivalasztjuk azt a szint amelyet szeretnenk
 
                     System.out.println(ongoingPlayer.getName() + " wants " + choosedColor + " color"); //kiirjuk az akciot
@@ -149,7 +148,7 @@ public class Action {
                 }
                 sayUno(ongoingPlayer); //megvizsgalom a sayUno methoddal hogy kell-e mondani unot
                 break;
-
+                
             case "Skip": //kimaradas kartya
                 System.out.println(msg); //akcio kiiratasa
                 System.out.println(otherPlayer.getName() + " is out of the loop"); //kiiratjuk hogy a masik jatekos kimarad
@@ -162,7 +161,6 @@ public class Action {
                 sayUno(ongoingPlayer); //megvizsgalom a sayUno methoddal hogy kell-e mondani unot
                 checkAction(ongoingPlayer, otherPlayer); //es ujra a jelenlegi jatekos jon
                 break;
-
             default:
         }
     }
